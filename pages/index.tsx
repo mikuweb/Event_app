@@ -1,12 +1,21 @@
 import Head from "next/head";
 import styles from "@/styles/Home.module.css";
 import Image from "next/image";
+import Link from "next/link";
+import { NextPage } from "next";
 
-interface HomeProps {
+interface Home {
+  id: string;
   title: string;
+  description: string;
+  image: string;
 }
 
-export default function Home({ data }: HomeProps) {
+interface HomeProps {
+  data: Home[];
+}
+
+const Home: NextPage<HomeProps> = ({ data }) => {
   return (
     <>
       <Head>
@@ -18,88 +27,35 @@ export default function Home({ data }: HomeProps) {
       <header>
         <nav>
           <img />
-          <a href="/">Home</a>
-          <a href="/events">Events</a>
-          <a href="/about-us">About Us</a>
+          <Link href="/">Home</Link>
+          <Link href="/events">Events</Link>
+          <Link href="/about-us">About Us</Link>
         </nav>
       </header>
 
       <main className={styles.main}>
         {data.map((ev) => {
           return (
-            <a key={ev.id} href={`events/${ev.id}`}>
+            <Link key={ev.id} href={`events/${ev.id}`}>
               <Image width={300} height={300} alt={ev.title} src={ev.image} />
               <h2>{ev.title}</h2>
               <p>{ev.description}</p>
-            </a>
+            </Link>
           );
         })}
-        <a href="/events/london">
-          <img />
-          <h2>Events in London</h2>
-          <p>
-            es simplemente el texto de relleno de las imprentas y archivos de
-            texto. Lorem Ipsum ha sido el texto de relleno estándar de las
-            industrias desde el año 1500, cuando un impresor (N. del T. persona
-            que se dedica a la imprenta) desconocido usó una galería de textos y
-            los mezcló de tal manera que logró hacer un libro de textos
-            especimen. No sólo sobrevivió 500 años, sino que tambien ingresó
-            como texto de relleno en documentos electrónicos, quedando
-            esencialmente igual al original. Fue popularizado en los 60s con la
-            creación de las hojas "Letraset", las cuales contenian pasajes de
-            Lorem Ipsum, y más recientemente con software de autoedición, como
-            por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem
-            Ipsum.
-          </p>
-        </a>
-
-        <a href="/events/sanfrancisco">
-          <img />
-          <h2>Events in San Francisco</h2>
-          <p>
-            es simplemente el texto de relleno de las imprentas y archivos de
-            texto. Lorem Ipsum ha sido el texto de relleno estándar de las
-            industrias desde el año 1500, cuando un impresor (N. del T. persona
-            que se dedica a la imprenta) desconocido usó una galería de textos y
-            los mezcló de tal manera que logró hacer un libro de textos
-            especimen. No sólo sobrevivió 500 años, sino que tambien ingresó
-            como texto de relleno en documentos electrónicos, quedando
-            esencialmente igual al original. Fue popularizado en los 60s con la
-            creación de las hojas "Letraset", las cuales contenian pasajes de
-            Lorem Ipsum, y más recientemente con software de autoedición, como
-            por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem
-            Ipsum.
-          </p>
-        </a>
-
-        <a href="">
-          <img />
-          <h2>Events in Barcelona</h2>
-          <p>
-            es simplemente el texto de relleno de las imprentas y archivos de
-            texto. Lorem Ipsum ha sido el texto de relleno estándar de las
-            industrias desde el año 1500, cuando un impresor (N. del T. persona
-            que se dedica a la imprenta) desconocido usó una galería de textos y
-            los mezcló de tal manera que logró hacer un libro de textos
-            especimen. No sólo sobrevivió 500 años, sino que tambien ingresó
-            como texto de relleno en documentos electrónicos, quedando
-            esencialmente igual al original. Fue popularizado en los 60s con la
-            creación de las hojas "Letraset", las cuales contenian pasajes de
-            Lorem Ipsum, y más recientemente con software de autoedición, como
-            por ejemplo Aldus PageMaker, el cual incluye versiones de Lorem
-            Ipsum.
-          </p>
-        </a>
       </main>
 
       <footer></footer>
     </>
   );
-}
+};
+
+export default Home;
 
 export async function getServerSideProps() {
   const { events_categories } = await import("../data/data.json");
   console.log(events_categories);
+
   return {
     props: {
       data: events_categories,

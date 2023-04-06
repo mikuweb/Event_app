@@ -1,5 +1,6 @@
 import { NextPage } from "next";
 import Image from "next/image";
+import Link from "next/link";
 
 interface Event {
   id: string;
@@ -16,25 +17,11 @@ const EventsPage: NextPage<EventsPageProps> = ({ data }) => {
     <div>
       <h1>Events Page</h1>
       {data.map((ev) => (
-        <a key={ev.id} href={`/events/${ev.id}`}>
+        <Link key={ev.id} href={`/events/${ev.id}`}>
           <Image alt={ev.title} width={300} height={300} src={ev.image} />
           <h2>{ev.title}</h2>
-        </a>
+        </Link>
       ))}
-      <a href="">
-        <img />
-        <h2>Events in London</h2>
-      </a>
-
-      <a href="">
-        <img />
-        <h2>Events in San Francisco</h2>
-      </a>
-
-      <a href="">
-        <img />
-        <h2>Events in Barcelona</h2>
-      </a>
     </div>
   );
 };
