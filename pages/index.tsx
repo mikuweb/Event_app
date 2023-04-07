@@ -3,17 +3,9 @@ import styles from "@/styles/Home.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { NextPage } from "next";
-
-interface Home {
-  id: string;
-  title: string;
-  description: string;
-  image: string;
-}
-
-interface HomeProps {
-  data: Home[];
-}
+import { HomePage, HomeProps } from "@/src/components/home/home-page";
+import { Footer } from "@/src/components/footer/footer";
+import { Header } from "@/src/components/header/header";
 
 const Home: NextPage<HomeProps> = ({ data }) => {
   return (
@@ -24,28 +16,7 @@ const Home: NextPage<HomeProps> = ({ data }) => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <header>
-        <nav>
-          <img />
-          <Link href="/">Home</Link>
-          <Link href="/events">Events</Link>
-          <Link href="/about-us">About Us</Link>
-        </nav>
-      </header>
-
-      <main className={styles.main}>
-        {data.map((ev) => {
-          return (
-            <Link key={ev.id} href={`events/${ev.id}`}>
-              <Image width={300} height={300} alt={ev.title} src={ev.image} />
-              <h2>{ev.title}</h2>
-              <p>{ev.description}</p>
-            </Link>
-          );
-        })}
-      </main>
-
-      <footer></footer>
+      <HomePage data={data} />
     </>
   );
 };
