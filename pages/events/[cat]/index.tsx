@@ -17,16 +17,23 @@ interface EventCatPageProps {
 
 const EventsCatPage: NextPage<EventCatPageProps> = ({ data, pageName }) => {
   return (
-    <div>
+    <div className="event-page">
       <h1>Event in {pageName}</h1>
-
-      {data.map((ev) => (
-        <Link key={ev.id} href={`/events/${ev.city}/${ev.id}`}>
-          <Image alt={ev.title} width={300} height={300} src={ev.image} />
-          <h2>{ev.title}</h2>
-          <p>{ev.description}</p>
-        </Link>
-      ))}
+      <div className="event-page-container">
+        {data.map((ev) => (
+          <Link
+            className="event-page-card"
+            key={ev.id}
+            href={`/events/${ev.city}/${ev.id}`}
+          >
+            <Image alt={ev.title} width={300} height={300} src={ev.image} />
+            <div className="event-page-content">
+              <h2>{ev.title}</h2>
+              <p>{ev.description}</p>
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };

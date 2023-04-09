@@ -1,11 +1,7 @@
 import Head from "next/head";
-import styles from "@/styles/Home.module.css";
-import Image from "next/image";
-import Link from "next/link";
+
 import { NextPage } from "next";
 import { HomePage, HomeProps } from "@/src/components/home/home-page";
-import { Footer } from "@/src/components/footer/footer";
-import { Header } from "@/src/components/header/header";
 
 const Home: NextPage<HomeProps> = ({ data }) => {
   return (

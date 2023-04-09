@@ -2,6 +2,7 @@ import { Footer } from "@/src/components/footer/footer";
 import { Header } from "@/src/components/header/header";
 import { MainLayout } from "@/src/components/layout/main-layout";
 import "@/styles/globals.css";
+import "@/styles/general.css";
 import type { AppProps } from "next/app";
 
 export default function App({ Component, pageProps }: AppProps) {

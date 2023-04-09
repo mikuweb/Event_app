@@ -14,14 +14,27 @@ interface EventsPageProps {
 
 const EventsPage: NextPage<EventsPageProps> = ({ data }) => {
   return (
-    <div>
+    <div className="events-page">
       <h1>Events Page</h1>
-      {data.map((ev) => (
-        <Link key={ev.id} href={`/events/${ev.id}`}>
-          <Image alt={ev.title} width={300} height={300} src={ev.image} />
-          <h2>{ev.title}</h2>
-        </Link>
-      ))}
+      <div className="events-page-container">
+        {data.map((ev) => (
+          
+          <Link
+            className="events-page-card"
+            key={ev.id}
+            href={`/events/${ev.id}`}
+          >
+            <Image
+              className="events-page-img"
+              alt={ev.title}
+              width={300}
+              height={300}
+              src={ev.image}
+            />
+            <h2 className="events-page-title">{ev.title}</h2>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };
